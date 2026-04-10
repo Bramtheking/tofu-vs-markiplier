@@ -49,7 +49,7 @@ let totalMustaches = 0;
 let state = 'START'; // START, PLAYING, DEATH, GAME_OVER, WIN
 let lastTime = 0;
 let score = 0;
-let highScore = parseInt(localStorage.getItem('highScore') || '0');
+let highScore = parseInt(localStorage.getItem('markiplierVsTofuHighScore') || '0');
 let lives = 3;
 let level = 1;
 let scaredTimer = 0;
@@ -382,6 +382,13 @@ function updateLivesIcons() {
         livesIcons.appendChild(img);
     }
     scoreDisplay.innerText = 'SCORE: ' + score.toString().padStart(6, '0');
+    
+    // Update high score
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('markiplierVsTofuHighScore', highScore.toString());
+    }
+    highScoreDisplay.innerText = 'HIGH: ' + highScore.toString().padStart(6, '0');
 }
 
 // Logic Helpers
