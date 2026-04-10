@@ -202,9 +202,8 @@ canvas {
 
 /* Mobile Controls */
 .mobile-controls {
-    position: fixed;
+    position: relative;
     z-index: 200;
-    /* Default hidden; managed by container visibility */
 }
 
 .mobile-controls-container {
@@ -227,14 +226,16 @@ canvas {
 @media screen and (orientation: landscape) and (max-height: 768px) {
     .landscape-control-left {
         display: block;
-        bottom: 20px;
+        top: 50%;
         left: 20px;
+        transform: translateY(-50%);
     }
     
     .landscape-control-right {
         display: block;
-        bottom: 20px;
+        top: 50%;
         right: 20px;
+        transform: translateY(-50%);
     }
 
     #game-container {

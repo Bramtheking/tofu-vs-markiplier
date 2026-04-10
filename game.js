@@ -56,7 +56,7 @@ let scaredTimer = 0;
 let flashTimer = 0;
 
 // Entities
-let player = { x: 0, y: 0, dir: 'LEFT', nextDir: 'LEFT', speed: 2.2 };
+let player = { x: 0, y: 0, dir: 'LEFT', nextDir: 'LEFT', speed: 2.42 };
 let ghosts = [];
 
 const spawnPlayer = () => { player.x = 9 * CELL_SIZE; player.y = 15 * CELL_SIZE; player.dir = 'RIGHT'; player.nextDir = 'RIGHT'; };
@@ -325,9 +325,14 @@ function resize() {
     let w = canvas.parentElement.clientWidth;
     let h = canvas.parentElement.clientHeight - 90; // minus top bar
     
-    let cellW = Math.floor(w / COLS);
-    let cellH = Math.floor(h / ROWS);
-    CELL_SIZE = Math.min(cellW, cellH) * 0.95;
+    let cellW = w / COLS;
+    let cellH = h / ROWS;
+    CELL_SIZE = Math.floor(Math.min(cellW, cellH)); // Keep integers to maintain sharp pixel art
+    
+    // Scale up extra on mobile vertically if width acts as limit
+    if (w < 600) {
+        CELL_SIZE = Math.floor(w / COLS);
+    }
     
     canvas.width = COLS * CELL_SIZE;
     canvas.height = ROWS * CELL_SIZE;
