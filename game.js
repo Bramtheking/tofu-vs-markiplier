@@ -717,3 +717,19 @@ function gameLoop(time) {
 
 // Ensure rendering even before play
 setInterval(() => { if(state === 'START') draw(); }, 100);
+
+// Fix black screen when returning to tab
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && state === 'PLAYING') {
+        lastTime = performance.now(); // Reset timing to prevent speed issues
+        requestAnimationFrame(gameLoop);
+    }
+});
+
+// Also handle page focus
+window.addEventListener('focus', () => {
+    if (state === 'PLAYING') {
+        lastTime = performance.now();
+        requestAnimationFrame(gameLoop);
+    }
+});

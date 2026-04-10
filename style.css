@@ -168,74 +168,85 @@ canvas {
 
 /* Force landscape on mobile */
 @media screen and (max-width: 768px) and (orientation: portrait) {
-    body::before {
-        content: "Please rotate your device to landscape mode";
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: #000;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        font-size: 18px;
-        z-index: 9999;
-        padding: 20px;
-    }
-    
     #game-container {
-        display: none;
+        height: calc(100dvh - 140px); /* Leave space for controls */
     }
 }
 
 /* Mobile Controls */
 .mobile-controls {
     position: fixed;
-    top: 50%;
-    transform: translateY(-50%);
     z-index: 200;
     display: none;
 }
 
-#mobile-controls-left {
-    left: 10px;
+.mobile-controls-container {
+    position: fixed;
+    z-index: 200;
 }
 
-#mobile-controls-right {
-    right: 10px;
-}
-
-@media screen and (max-width: 1024px) and (orientation: landscape) {
+/* Portrait mode - single control at bottom center */
+@media screen and (max-width: 768px) and (orientation: portrait) {
     .mobile-controls {
         display: block;
+    }
+    
+    .mobile-controls-container {
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+}
+
+/* Landscape mode - single control at bottom right */
+@media screen and (orientation: landscape) and (max-height: 768px) {
+    .mobile-controls {
+        display: block;
+    }
+    
+    .mobile-controls-container {
+        bottom: 10px;
+        right: 10px;
+    }
+    
+    #game-container {
+        padding-right: 140px; /* Make room for control */
+    }
+}
+
+/* Desktop - hide controls */
+@media screen and (min-width: 1025px) and (min-height: 769px) {
+    .mobile-controls {
+        display: none !important;
+    }
+    
+    .mobile-controls-container {
+        display: none !important;
     }
 }
 
 .control-label {
     text-align: center;
-    font-size: 10px;
+    font-size: 8px;
     color: #ff107a;
-    margin-bottom: 5px;
+    margin-bottom: 3px;
     text-shadow: 0 0 5px #ff107a;
 }
 
 .dpad {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
 }
 
 .dpad-btn {
     position: absolute;
-    width: 40px;
-    height: 40px;
+    width: 35px;
+    height: 35px;
     background: rgba(255, 16, 122, 0.3);
     border: 2px solid #ff107a;
     color: #fff;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
     user-select: none;
     display: flex;
