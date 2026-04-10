@@ -327,11 +327,13 @@ function resize() {
     
     let cellW = w / COLS;
     let cellH = h / ROWS;
-    CELL_SIZE = Math.floor(Math.min(cellW, cellH)); // Keep integers to maintain sharp pixel art
     
-    // Scale up extra on mobile vertically if width acts as limit
-    if (w < 600) {
-        CELL_SIZE = Math.floor(w / COLS);
+    if (window.innerHeight > window.innerWidth) {
+        // Portrait: guarantee it hits horizontal edges unconditionally
+        CELL_SIZE = cellW;
+    } else {
+        // Landscape: clamp safely to viewport height
+        CELL_SIZE = Math.floor(Math.min(cellW, cellH)); 
     }
     
     canvas.width = COLS * CELL_SIZE;

@@ -213,12 +213,17 @@ canvas {
 }
 
 /* Portrait mode - single control at bottom center */
-@media screen and (max-width: 768px) and (orientation: portrait) {
+@media screen and (orientation: portrait) {
     .portrait-control {
-        display: block;
-        bottom: 10px;
-        left: 50%;
-        transform: translateX(-50%);
+        display: block !important;
+        position: fixed;
+        bottom: 50px;
+        left: 0;
+        right: 0;
+        margin: 0 auto;
+        width: 150px;
+        height: 150px;
+        z-index: 999999;
     }
 }
 
@@ -261,18 +266,18 @@ canvas {
 
 .dpad {
     position: relative;
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 }
 
 .dpad-btn {
     position: absolute;
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     background: rgba(255, 16, 122, 0.3);
     border: 2px solid #ff107a;
     color: #fff;
-    font-size: 16px;
+    font-size: 24px;
     cursor: pointer;
     user-select: none;
     display: flex;
