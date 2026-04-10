@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Tofu Man VS The Face</title>
+    <meta name="description" content="A top-down Pac-Man clone based on the Markiplier vs. Tofu meme.">
+    <!-- Preload fonts to avoid flash -->
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- High performance CORS-free pure cyan pixel removal -->
+        <svg width="0" height="0" style="position:absolute;z-index:-1;">
+            <filter id="remove-cyan" color-interpolation-filters="sRGB">
+                <feColorMatrix type="matrix" values="
+                    1 0 0 0 0
+                    0 1 0 0 0
+                    0 0 1 0 0
+                    1.2 -1 0 1 0
+                " />
+            </filter>
+        </svg>
+
+        <!-- We will put the game canvas here -->
+        <canvas id="gameCanvas" style="filter: url(#remove-cyan);"></canvas>
+        <div id="ui-layer">
+            <div id="bite-back" class="hidden">BITE BACK!</div>
+            
+            <div id="start-screen">
+                <h1 id="start-title">MARKIPLIER VS TOFU</h1>
+                <p>Tap or Press Space to Start</p>
+                <div class="credits">Created by Bramwel Agina<br><a href="https://www.linkedin.com/in/bramwel-agina-a88678266/" target="_blank">LinkedIn</a></div>
+            </div>
+            
+            <div id="game-over-screen" class="hidden">
+                <h1 id="game-over-title">GAME OVER</h1>
+                <p id="final-score">FINAL SCORE: 000000</p>
+                <p class="restart-prompt">Tap or Press Space to Restart</p>
+            </div>
+            
+            <div id="bottom-bar">
+                <div class="stats">
+                    <span id="score-display">SCORE: 000000</span>
+                    <span id="high-score-display">HIGHEST: 000000</span>
+                    <span id="lives-display">LIVES: <span id="lives-icons"></span>x<span id="lives-count">3</span></span>
+                </div>
+                <div class="title-bottom">MARKIPLIER VS TOFU</div>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
