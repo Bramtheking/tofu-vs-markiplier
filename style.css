@@ -192,11 +192,10 @@ canvas {
 }
 
 
-/* Force landscape on mobile */
+/* Center the game in portrait since there are no controls */
 @media screen and (max-width: 768px) and (orientation: portrait) {
     #game-container {
-        height: calc(100dvh - 140px);
-        /* Leave space for controls */
+        justify-content: center;
     }
 }
 
@@ -212,22 +211,12 @@ canvas {
     display: none; /* Hide all by default */
 }
 
-/* Portrait mode - single control at bottom center */
+/* Portrait mode - Canvas sizing */
 @media screen and (orientation: portrait) {
-    .portrait-control {
-        display: block !important;
-        position: fixed;
-        bottom: 120px;
-        left: 0;
-        right: 0;
-        margin: 0 auto;
-        width: 220px;
-        height: 220px;
-        z-index: 999999;
-    }
     canvas {
         width: 100% !important;
         height: auto !important;
+        margin-top: 0; /* Remove top margin pushes since we use flex center */
     }
 }
 
@@ -253,8 +242,8 @@ canvas {
     }
 }
 
-/* Desktop - hide controls completely */
-@media screen and (min-width: 1025px) and (min-height: 769px) {
+/* Desktop/Laptop - hide controls completely */
+@media screen and (min-width: 1024px), (pointer: fine) {
     .mobile-controls-container {
         display: none !important;
     }
