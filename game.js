@@ -234,34 +234,28 @@ function checkSpritesLoaded() {
 
 images.markiplier.onload = checkSpritesLoaded;
 images.tofuNormal.onload = checkSpritesLoaded;
+// Allow missing scare sprite gracefully
 images.tofuScared.onload = checkSpritesLoaded;
 
-// Fallback logic if images fail to load
 images.markiplier.onerror = () => { checkSpritesLoaded(); };
 images.tofuNormal.onerror = () => { checkSpritesLoaded(); };
 images.tofuScared.onerror = () => { checkSpritesLoaded(); };
 
+// Set sources to initiate load
 images.markiplier.src = 'assets/sprites/markiplier.png';
 images.tofuNormal.src = 'assets/sprites/tofu-normal.png';
 images.tofuScared.src = 'assets/sprites/tofu-scared.png';
 
-// Preload images before starting
-Promise.all([
-    new Promise(resolve => {
-        if (images.markiplier.complete) resolve();
-        else images.markiplier.onload = resolve;
-    }),
-    new Promise(resolve => {
-        if (images.tofuNormal.complete) resolve();
-        else images.tofuNormal.onload = resolve;
-    }),
-    new Promise(resolve => {
-        if (images.tofuScared.complete) resolve();
-        else images.tofuScared.onload = resolve;
-    })
-]).then(() => {
-    console.log('All sprites preloaded and ready!');
-});
+// Fallback in case cached images already finished loading very quickly
+setTimeout(() => {
+    if (loadedSprites < 3) {
+        if (images.markiplier.complete && images.tofuNormal.complete) {
+            // Force the flag if somehow onload skipped
+            if(!spritesReady) checkSpritesLoaded();
+        }
+    }
+}, 3000);
+
 
 // Maze Prerenderer
 let mapCanvas;
@@ -718,11 +712,10 @@ function gameLoop(time) {
 // Ensure rendering even before play
 setInterval(() => { if(state === 'START') draw(); }, 100);
 
-// Fix black screen when returning to tab
+// Fix timing issues when returning to tab
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden && state === 'PLAYING') {
         lastTime = performance.now(); // Reset timing to prevent speed issues
-        requestAnimationFrame(gameLoop);
     }
 });
 
@@ -730,6 +723,5 @@ document.addEventListener('visibilitychange', () => {
 window.addEventListener('focus', () => {
     if (state === 'PLAYING') {
         lastTime = performance.now();
-        requestAnimationFrame(gameLoop);
     }
 });

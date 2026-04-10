@@ -2,14 +2,16 @@
 body {
     margin: 0;
     padding: 0;
-    background-color: #050005; /* Pitch black */
+    background-color: #050005;
+    /* Pitch black */
     color: white;
     font-family: 'Press Start 2P', monospace;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    touch-action: none; /* Prevent scrolling for swipe */
+    touch-action: none;
+    /* Prevent scrolling for swipe */
     overflow: hidden;
 }
 
@@ -31,10 +33,19 @@ canvas {
     margin-top: 90px;
 }
 
+@media screen and (min-width: 769px) {
+    canvas {
+        margin-left: 70px;
+    }
+}
+
 #ui-layer {
     position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
 }
 
 #bottom-bar {
@@ -89,25 +100,37 @@ canvas {
     left: 50%;
     transform: translate(-50%, -50%);
     font-size: 28px;
-    color: #00ffff; /* Cyan bite back */
+    color: #00ffff;
+    /* Cyan bite back */
     text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
     animation: flash 0.5s infinite alternate;
     z-index: 10;
 }
 
 @keyframes flash {
-    0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-    100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    100% {
+        opacity: 0.8;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
 }
 
 .hidden {
     display: none !important;
 }
 
-#start-screen, #game-over-screen {
+#start-screen,
+#game-over-screen {
     position: absolute;
-    top: 90px; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.85);
+    top: 90px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.85);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -117,7 +140,8 @@ canvas {
     z-index: 100;
 }
 
-#start-screen h1, #game-over-screen h1 {
+#start-screen h1,
+#game-over-screen h1 {
     font-size: 24px;
     margin-bottom: 20px;
     color: #ff107a;
@@ -125,7 +149,8 @@ canvas {
     line-height: 1.5;
 }
 
-#start-screen p, #game-over-screen p {
+#start-screen p,
+#game-over-screen p {
     font-size: 12px;
 }
 
@@ -140,8 +165,13 @@ canvas {
 }
 
 @keyframes blink {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }
 
 .credits {
@@ -169,7 +199,8 @@ canvas {
 /* Force landscape on mobile */
 @media screen and (max-width: 768px) and (orientation: portrait) {
     #game-container {
-        height: calc(100dvh - 140px); /* Leave space for controls */
+        height: calc(100dvh - 140px);
+        /* Leave space for controls */
     }
 }
 
@@ -177,49 +208,47 @@ canvas {
 .mobile-controls {
     position: fixed;
     z-index: 200;
-    display: none;
+    /* Default hidden; managed by container visibility */
 }
 
 .mobile-controls-container {
     position: fixed;
     z-index: 200;
+    display: none; /* Hide all by default */
 }
 
 /* Portrait mode - single control at bottom center */
 @media screen and (max-width: 768px) and (orientation: portrait) {
-    .mobile-controls {
+    .portrait-control {
         display: block;
-    }
-    
-    .mobile-controls-container {
         bottom: 10px;
         left: 50%;
         transform: translateX(-50%);
     }
 }
 
-/* Landscape mode - single control at bottom right */
+/* Landscape mode - left and right controls */
 @media screen and (orientation: landscape) and (max-height: 768px) {
-    .mobile-controls {
+    .landscape-control-left {
         display: block;
+        bottom: 20px;
+        left: 20px;
     }
     
-    .mobile-controls-container {
-        bottom: 10px;
-        right: 10px;
+    .landscape-control-right {
+        display: block;
+        bottom: 20px;
+        right: 20px;
     }
-    
+
     #game-container {
-        padding-right: 140px; /* Make room for control */
+        padding-left: 120px; /* Make room for left control */
+        padding-right: 120px; /* Make room for right control */
     }
 }
 
-/* Desktop - hide controls */
+/* Desktop - hide controls completely */
 @media screen and (min-width: 1025px) and (min-height: 769px) {
-    .mobile-controls {
-        display: none !important;
-    }
-    
     .mobile-controls-container {
         display: none !important;
     }
