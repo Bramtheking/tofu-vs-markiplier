@@ -217,13 +217,17 @@ canvas {
     .portrait-control {
         display: block !important;
         position: fixed;
-        bottom: 50px;
+        bottom: 120px;
         left: 0;
         right: 0;
         margin: 0 auto;
-        width: 150px;
-        height: 150px;
+        width: 220px;
+        height: 220px;
         z-index: 999999;
+    }
+    canvas {
+        width: 100% !important;
+        height: auto !important;
     }
 }
 
@@ -232,14 +236,14 @@ canvas {
     .landscape-control-left {
         display: block;
         top: 50%;
-        left: 20px;
+        left: 80px;
         transform: translateY(-50%);
     }
     
     .landscape-control-right {
         display: block;
         top: 50%;
-        right: 20px;
+        right: 80px;
         transform: translateY(-50%);
     }
 
@@ -266,18 +270,18 @@ canvas {
 
 .dpad {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 220px;
+    height: 220px;
 }
 
 .dpad-btn {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
     background: rgba(255, 16, 122, 0.3);
     border: 2px solid #ff107a;
     color: #fff;
-    font-size: 24px;
+    font-size: 34px;
     cursor: pointer;
     user-select: none;
     display: flex;

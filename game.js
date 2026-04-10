@@ -323,7 +323,8 @@ loadMap();
 // Window Resize
 function resize() {
     let w = canvas.parentElement.clientWidth;
-    let h = canvas.parentElement.clientHeight - 90; // minus top bar
+    // Explicitly clamp to window height - 100px to guarantee safe bottom clearance
+    let h = Math.min(canvas.parentElement.clientHeight, window.innerHeight) - 100;
     
     let cellW = w / COLS;
     let cellH = h / ROWS;
