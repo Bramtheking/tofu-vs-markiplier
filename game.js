@@ -245,6 +245,24 @@ images.markiplier.src = 'assets/sprites/markiplier.png';
 images.tofuNormal.src = 'assets/sprites/tofu-normal.png';
 images.tofuScared.src = 'assets/sprites/tofu-scared.png';
 
+// Preload images before starting
+Promise.all([
+    new Promise(resolve => {
+        if (images.markiplier.complete) resolve();
+        else images.markiplier.onload = resolve;
+    }),
+    new Promise(resolve => {
+        if (images.tofuNormal.complete) resolve();
+        else images.tofuNormal.onload = resolve;
+    }),
+    new Promise(resolve => {
+        if (images.tofuScared.complete) resolve();
+        else images.tofuScared.onload = resolve;
+    })
+]).then(() => {
+    console.log('All sprites preloaded and ready!');
+});
+
 // Maze Prerenderer
 let mapCanvas;
 function prerenderMap() {
@@ -321,6 +339,26 @@ function setDir(d) {
     console.log('Setting direction to:', d, 'Current state:', state);
     player.nextDir = d; 
 }
+
+// Mobile button controls
+document.querySelectorAll('.dpad-btn').forEach(btn => {
+    btn.addEventListener('touchstart', (e) => {
+        e.preventDefault();
+        const dir = btn.getAttribute('data-dir');
+        setDir(dir);
+        btn.style.background = 'rgba(255, 16, 122, 0.7)';
+    });
+    btn.addEventListener('touchend', (e) => {
+        e.preventDefault();
+        btn.style.background = 'rgba(255, 16, 122, 0.3)';
+    });
+    btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const dir = btn.getAttribute('data-dir');
+        setDir(dir);
+    });
+});
+
 window.addEventListener('keydown', e => {
     e.preventDefault(); // Prevent page scrolling
     if(e.code === 'ArrowUp' || e.code === 'KeyW') setDir('UP');

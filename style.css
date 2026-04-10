@@ -164,3 +164,125 @@ canvas {
 .credits a:hover {
     color: #ff107a;
 }
+
+
+/* Force landscape on mobile */
+@media screen and (max-width: 768px) and (orientation: portrait) {
+    body::before {
+        content: "Please rotate your device to landscape mode";
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: #000;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-size: 18px;
+        z-index: 9999;
+        padding: 20px;
+    }
+    
+    #game-container {
+        display: none;
+    }
+}
+
+/* Mobile Controls */
+.mobile-controls {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 200;
+    display: none;
+}
+
+#mobile-controls-left {
+    left: 10px;
+}
+
+#mobile-controls-right {
+    right: 10px;
+}
+
+@media screen and (max-width: 1024px) and (orientation: landscape) {
+    .mobile-controls {
+        display: block;
+    }
+}
+
+.control-label {
+    text-align: center;
+    font-size: 10px;
+    color: #ff107a;
+    margin-bottom: 5px;
+    text-shadow: 0 0 5px #ff107a;
+}
+
+.dpad {
+    position: relative;
+    width: 120px;
+    height: 120px;
+}
+
+.dpad-btn {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 16, 122, 0.3);
+    border: 2px solid #ff107a;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(255, 16, 122, 0.5);
+    transition: all 0.1s;
+}
+
+.dpad-btn:active {
+    background: rgba(255, 16, 122, 0.7);
+    box-shadow: 0 0 20px rgba(255, 16, 122, 0.9);
+    transform: scale(0.95);
+}
+
+.dpad-up {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dpad-down {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.dpad-left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dpad-right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.mobile-hint {
+    font-size: 10px;
+    color: #00ffff;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 1025px) {
+    .mobile-hint {
+        display: none;
+    }
+}

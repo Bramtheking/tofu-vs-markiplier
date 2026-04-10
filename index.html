@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-fullscreen">
     <title>MARKIPLIER VS TOFU</title>
     <meta name="description" content="A top-down Pac-Man clone based on the Markiplier vs. Tofu meme.">
     <!-- Preload fonts to avoid flash -->
@@ -25,11 +28,34 @@
 
         <!-- We will put the game canvas here -->
         <canvas id="gameCanvas" style="filter: url(#remove-cyan);"></canvas>
-        <div id="ui-layer">
+        
+        <!-- Mobile Controls -->
+        <div id="mobile-controls-left" class="mobile-controls">
+            <div class="control-label">WASD</div>
+            <div class="dpad">
+                <button class="dpad-btn dpad-up" data-dir="UP">▲</button>
+                <button class="dpad-btn dpad-left" data-dir="LEFT">◄</button>
+                <button class="dpad-btn dpad-down" data-dir="DOWN">▼</button>
+                <button class="dpad-btn dpad-right" data-dir="RIGHT">►</button>
+            </div>
+        </div>
+        
+        <div id="mobile-controls-right" class="mobile-controls">
+            <div class="control-label">ARROWS</div>
+            <div class="dpad">
+                <button class="dpad-btn dpad-up" data-dir="UP">▲</button>
+                <button class="dpad-btn dpad-left" data-dir="LEFT">◄</button>
+                <button class="dpad-btn dpad-down" data-dir="DOWN">▼</button>
+                <button class="dpad-btn dpad-right" data-dir="RIGHT">►</button>
+            </div>
+        </div>
+        
+        <div id="ui-layer"></div>
             <div id="bite-back" class="hidden">BITE BACK!</div>
             
             <div id="start-screen">
                 <h1 id="start-title">MARKIPLIER VS TOFU</h1>
+                <p class="mobile-hint">Use buttons or swipe to move</p>
                 <p>Tap or Press Space to Start</p>
                 <div class="credits">Created by Bramwel Agina<br><a href="https://www.linkedin.com/in/bramwel-agina-a88678266/" target="_blank">LinkedIn</a></div>
             </div>
