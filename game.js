@@ -232,9 +232,23 @@ function checkSpritesLoaded() {
     }
 }
 
+const checkImageState = () => {
+    let loaded = 0;
+    if (images.markiplier.complete) loaded++;
+    if (images.tofuNormal.complete) loaded++;
+    if (images.tofuScared.complete) loaded++;
+    
+    if (loaded >= 2 && !spritesReady) {
+        console.log('Force activating sprites from cache...');
+        images.markiplier = removeCyanBackground(images.markiplier);
+        images.tofuNormal = removeCyanBackground(images.tofuNormal);
+        images.tofuScared = removeCyanBackground(images.tofuScared);
+        spritesReady = true;
+    }
+};
+
 images.markiplier.onload = checkSpritesLoaded;
 images.tofuNormal.onload = checkSpritesLoaded;
-// Allow missing scare sprite gracefully
 images.tofuScared.onload = checkSpritesLoaded;
 
 images.markiplier.onerror = () => { checkSpritesLoaded(); };
@@ -246,15 +260,10 @@ images.markiplier.src = 'assets/sprites/markiplier.png';
 images.tofuNormal.src = 'assets/sprites/tofu-normal.png';
 images.tofuScared.src = 'assets/sprites/tofu-scared.png';
 
-// Fallback in case cached images already finished loading very quickly
-setTimeout(() => {
-    if (loadedSprites < 3) {
-        if (images.markiplier.complete && images.tofuNormal.complete) {
-            // Force the flag if somehow onload skipped
-            if(!spritesReady) checkSpritesLoaded();
-        }
-    }
-}, 3000);
+// Double-check cache completion instantly and with backup timers
+checkImageState();
+setTimeout(checkImageState, 500);
+setTimeout(checkImageState, 2000);
 
 
 // Maze Prerenderer

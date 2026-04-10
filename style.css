@@ -31,12 +31,8 @@ canvas {
     display: block;
     image-rendering: pixelated;
     margin-top: 90px;
-}
-
-@media screen and (min-width: 769px) {
-    canvas {
-        margin-left: 70px;
-    }
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #ui-layer {
