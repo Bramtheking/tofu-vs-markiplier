@@ -306,15 +306,10 @@ function resize() {
     
     let cellW = Math.floor(w / COLS);
     let cellH = Math.floor(h / ROWS);
-    CELL_SIZE = Math.min(cellW, cellH) * 0.98;
+    CELL_SIZE = Math.min(cellW, cellH) * 0.95;
     
     canvas.width = COLS * CELL_SIZE;
     canvas.height = ROWS * CELL_SIZE;
-    
-    // Position canvas centrally in container
-    let offsetX = (w - canvas.width) / 2;
-    canvas.style.marginLeft = offsetX + 'px';
-    canvas.style.marginTop = '90px'; // Push down below top bar
     
     prerenderMap();
 }

@@ -21,13 +21,14 @@ body {
     background-color: #0a010a;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    overflow: hidden;
 }
 
 canvas {
-    width: 100%;
-    flex: 1; /* Take up all remaining space above the bar */
     display: block;
-    image-rendering: pixelated; 
+    image-rendering: pixelated;
+    margin-top: 90px;
 }
 
 #ui-layer {
@@ -56,9 +57,11 @@ canvas {
 .stats {
     display: flex;
     justify-content: space-between;
-    font-size: 14px;
+    font-size: 12px;
     text-shadow: 0 0 5px #fff;
     align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .title-bottom {
@@ -142,7 +145,7 @@ canvas {
 }
 
 .credits {
-    margin-top: 40px;
+    margin-top: 30px;
     font-size: 10px;
     line-height: 1.8;
     color: #aaa;
@@ -153,4 +156,11 @@ canvas {
     pointer-events: auto;
     text-decoration: none;
     border-bottom: 1px dotted #00ffff;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s;
+}
+
+.credits a:hover {
+    color: #ff107a;
 }
